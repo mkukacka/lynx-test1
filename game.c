@@ -21,13 +21,21 @@ typedef struct {
 	char palette[8];
 } sprite_t;
 
+int xpos = 30, ypos = 40;
+
 void show_screen()
 {
+	char text[20];
+
 	// Clear current screen
 	tgi_clear();
 	
 	tgi_setcolor(COLOR_WHITE);
-	tgi_outtextxy(60, 48, "Hello world!");
+	tgi_outtextxy(xpos, ypos, "Hello world!");
+
+	
+	itoa(xpos, text, 10);
+	tgi_outtextxy(5, 5, text);
 
 	tgi_updatedisplay();
 }
@@ -73,6 +81,19 @@ void main(void)
 		}
 
 		joy = joy_read(JOY_1);
+		if(JOY_BTN_DOWN(joy)){
+			ypos += 1;
+		}
+		if(JOY_BTN_UP(joy)){
+			ypos -= 1;
+		}
+		if(JOY_BTN_LEFT(joy)){
+			xpos -= 1;
+		}
+		if(JOY_BTN_RIGHT(joy)){
+			xpos += 1;
+		}
+		/*
 		if (!joy) waitForRelease = 0;
 		if (waitForRelease != 0) continue;
 
@@ -85,10 +106,13 @@ void main(void)
 		{
 			waitForRelease = 1;
 		}
+		*/
 
-		if (!tgi_busy())
-		{
-			show_screen();
-		}
+		// if (!tgi_busy())
+		// {
+		// 	show_screen();
+		// }
+		show_screen();
+		while(tgi_busy()){ }
 	};
 }
