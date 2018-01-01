@@ -8,11 +8,32 @@
             "type": "shell",
             "command": "make -f game.mak BUILD=Debug all",
             "windows": {
-                "command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\bin\\nmake\" /f game.mak BUILD=Debug all"
+                //"command": "\"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\bin\\nmake\" /f game.mak BUILD=Debug all"
+                "command": "make all"
             },
-            "group": {
-                "kind": "build",
-                "isDefault": true
+            "group": "build",
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Clean",
+            "type": "shell",
+            "command": "make clean",
+            "windows": {
+                "command": "make clean"
+            },
+            "group": "build",
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
             }
         }
     ]
