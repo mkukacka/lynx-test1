@@ -8,6 +8,7 @@
 
 extern char lynxtgi[];
 extern char lynxjoy[];
+extern char robot[];
 
 extern char pal[];
 
@@ -18,8 +19,24 @@ typedef struct {
 	void *next;
 	void *bitmap;
 	int posx, posy, sizex, sizey;
+	int stretch;
+	int tilt;
 	char palette[8];
 } sprite_t;
+
+sprite_t robotsprite = 
+{
+	BPP_4 | TYPE_NORMAL, 		// color depth and sprite type
+	REHVST, 					// sprite structure type
+	0x01,						// collision depository number
+	0,							// next chained sprite address
+	&robot,						// bitmap data
+	20, 50, 					// initial sprite position
+	0x0100, 0x0100,				// size changes - 0x0100 is no change
+	0x0000, 					// stretch 
+	0x0000,						// tilt
+	{ 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }	// pallete indexes for each pen
+};
 
 int xpos = 30, ypos = 40;
 
@@ -30,12 +47,17 @@ void show_screen()
 	// Clear current screen
 	tgi_clear();
 	
+	/*
 	tgi_setcolor(COLOR_WHITE);
 	tgi_outtextxy(xpos, ypos, "Hello world!");
-
 	
 	itoa(xpos, text, 10);
 	tgi_outtextxy(5, 5, text);
+	*/
+
+	robotsprite.posx = xpos;
+	robotsprite.posy = ypos;
+	tgi_sprite(&robotsprite);
 
 	tgi_updatedisplay();
 }

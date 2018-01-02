@@ -12,7 +12,7 @@ CC=$(CC65_BIN)\cc65
 AS=$(CC65_BIN)\ca65
 CL=$(CC65_BIN)\cl65
 SP=$(CC65_BIN)\sp65
-SPRPCK=sprpck
+SPRPCK=$(CC65_BIN)\sprpck
 ECHO=$(CC65_TOOLS)\echo
 TOUCH=$(CC65_TOOLS)\touch
 
