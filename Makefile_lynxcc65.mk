@@ -71,3 +71,15 @@ lynx-160-102-16.o:
 	$(RM) $*.s
 	$(RM) $*.pal
 	$(RM) $*.spr
+
+# Rule for making an *.c file out of a *.pcx file, SHAPED mode
+# for transparent mode, use: $(SP) -r $< -c lynx-sprite,mode=transparent
+# few examples of other uses:
+#  sp65 -r robot1.pcx -c lynx-sprite,mode=packed,ax=0,ay=0 -w robot1.c,ident=robot1
+#  sp65 -r robot1.pcx -c lynx-sprite,mode=shaped,ax=0,ay=0,edge=0 -w robot1.c,ident=robot1
+#  sp65 -r robot1.pcx -c lynx-sprite,mode=literal,ax=0,ay=0,edge=0 -w robot1.c,ident=robot1
+#  sp65 -r robot1.pcx -c lynx-sprite,mode=shaped,ax=0,ay=0,edge=0 -w robot1.s
+.pcx.o:
+	$(SP) -r $< -c lynx-sprite,mode=shaped,ax=0,ay=0,edge=0 -w $*.s,ident=$*
+	$(AS) -t lynx -o $@ $(AFLAGS) $*.s
+	

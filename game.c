@@ -9,6 +9,7 @@
 extern char lynxtgi[];
 extern char lynxjoy[];
 extern char robot[];
+extern char robot1[];
 
 extern char pal[];
 
@@ -30,7 +31,7 @@ sprite_t robotsprite =
 	REHVST, 					// sprite structure type
 	0x01,						// collision depository number
 	0,							// next chained sprite address
-	&robot,						// bitmap data
+	&robot1,						// bitmap data
 	20, 50, 					// initial sprite position
 	0x0100, 0x0100,				// size changes - 0x0100 is no change
 	0x0000, 					// stretch 
