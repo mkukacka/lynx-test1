@@ -10,8 +10,25 @@ extern char lynxtgi[];
 extern char lynxjoy[];
 extern char robot[];
 extern char robot1[];
+extern char oddSize[];
 
 extern char pal[];
+
+unsigned char singlepixel_data[4] = { 0x03, 0x87, 0x80, 0x00 }; // 1 0000 111 1 0000 000 
+
+unsigned char sprite_2pixel[] = {
+	0x2,   0x11,
+	0
+	};
+
+const unsigned char player[] = {
+    // 0x03,0x40,0x00,
+    // 0x03,0xE0,0x00,
+    // 0x00
+	0x04, 0x01, 0x00,
+	0x04, 0x11, 0x10,
+	0
+};
 
 typedef struct {
 	unsigned char b0;
@@ -39,6 +56,34 @@ sprite_t robotsprite =
 	{ 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }	// pallete indexes for each pen
 };
 
+sprite_t enemy1 = 
+{
+	BPP_4 | TYPE_NORMAL, 		// color depth and sprite type
+	LITERAL | REHVST, 					// sprite structure type
+	0x01,						// collision depository number
+	0,							// next chained sprite address
+	&sprite_2pixel,						// bitmap data
+	60, 60, 					// initial sprite position
+	0x0100, 0x0200,				// size changes - 0x0100 is no change
+	0x0000, 					// stretch 
+	0x0000,						// tilt
+	{ 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }	// pallete indexes for each pen
+};
+
+sprite_t player1 = 
+{
+	BPP_4 | TYPE_NORMAL, 		// color depth and sprite type
+	LITERAL | REHVST, 					// sprite structure type
+	0x01,						// collision depository number
+	0,							// next chained sprite address
+	&oddSize,						// bitmap data
+	80, 60, 					// initial sprite position
+	0x0100, 0x0100,				// size changes - 0x0100 is no change
+	0x0000, 					// stretch 
+	0x0000,						// tilt
+	{ 0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef }				// pallete indexes for each pen
+};
+
 int xpos = 30, ypos = 40;
 
 void show_screen()
@@ -57,6 +102,8 @@ void show_screen()
 	tgi_outtextxy(5, 5, text);
 	*/
 
+	
+
 	robotsprite.b0 = BPP_4 | TYPE_NORMAL;
 	robotsprite.palette[1] = 0x23;
 
@@ -72,6 +119,9 @@ void show_screen()
 	robotsprite.posx = xpos - 10;
 	robotsprite.palette[1] = 0x32;
 	tgi_sprite(&robotsprite);
+
+	tgi_sprite(&enemy1);
+	tgi_sprite(&player1);
 
 	tgi_updatedisplay();
 }

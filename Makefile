@@ -3,7 +3,7 @@ include Makefile_lynxcc65.mk
 
 target = game.lnx
 objects = lynx-160-102-16.o lynx-stdjoy.o \
-	robot.o robot1.o \
+	robot.o robot1.o oddSize.o \
 	game.o
 
 robot.o: robot.bmp
@@ -25,6 +25,13 @@ robot1.o: robot1.bmp
 	$(ECHO) .segment \"$(RODATA_SEGMENT)\" >> $*.s
 	$(ECHO) _robot1: .incbin \"robot1.spr\" >> $*.s
 	$(AS) -t lynx -o $@ $(AFLAGS) $*.s
+
+#$(SP) -r $< --slice 16,0,8,8 -c lynx-sprite,mode=literal,ax=0,ay=0 -w $*.c,ident=$*
+
+#oddSize.o: oddSize.pcx
+ 	#$(SP) -r $< -c lynx-sprite,mode=literal,ax=0,ay=0 -w $*.c,ident=$*
+	#$(CC) $(SEGMENTS) $(CFLAGS) -o $*.s $*.c 
+ 	#$(AS) -o $@ $(AFLAGS) $(*).s 
 
 all: $(target)
 
