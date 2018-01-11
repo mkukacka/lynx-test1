@@ -44,6 +44,7 @@ int xpos = 30, ypos = 40;
 void show_screen()
 {
 	char text[20];
+	int tmp;
 
 	// Clear current screen
 	tgi_clear();
@@ -56,8 +57,20 @@ void show_screen()
 	tgi_outtextxy(5, 5, text);
 	*/
 
+	robotsprite.b0 = BPP_4 | TYPE_NORMAL;
+	robotsprite.palette[1] = 0x23;
+
 	robotsprite.posx = xpos;
 	robotsprite.posy = ypos;
+	tgi_sprite(&robotsprite);
+
+	robotsprite.b0 = BPP_4 | TYPE_NORMAL | VFLIP;
+	robotsprite.posx = xpos + 10;
+	tgi_sprite(&robotsprite);
+
+	robotsprite.b0 = BPP_4 | TYPE_NORMAL | HFLIP;
+	robotsprite.posx = xpos - 10;
+	robotsprite.palette[1] = 0x32;
 	tgi_sprite(&robotsprite);
 
 	tgi_updatedisplay();

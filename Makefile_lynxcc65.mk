@@ -79,6 +79,7 @@ lynx-160-102-16.o:
 #  sp65 -r robot1.pcx -c lynx-sprite,mode=shaped,ax=0,ay=0,edge=0 -w robot1.c,ident=robot1
 #  sp65 -r robot1.pcx -c lynx-sprite,mode=literal,ax=0,ay=0,edge=0 -w robot1.c,ident=robot1
 #  sp65 -r robot1.pcx -c lynx-sprite,mode=shaped,ax=0,ay=0,edge=0 -w robot1.s
+# Obsolete but still valuable documentation: https://cc65.github.io/doc/sp65.html
 .pcx.o:
 	$(SP) -r $< -c lynx-sprite,mode=shaped,ax=0,ay=0,edge=0 -w $*.s,ident=$*
 	$(AS) -t lynx -o $@ $(AFLAGS) $*.s
